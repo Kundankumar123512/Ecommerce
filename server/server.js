@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://ecommerce-cysz.vercel.app/auth/login",
+    origin: process.env.FRONTEND_URL || "https://ecommerce-cysz.vercel.app",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
