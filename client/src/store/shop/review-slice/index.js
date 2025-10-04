@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// ✅ Base API URL from .env
+const API_URL = import.meta.env.VITE_API_URL;
+
 const initialState = {
   isLoading: false,
   reviews: {
@@ -16,12 +19,15 @@ export const addReview = createAsyncThunk(
   async (formdata, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/shop/review/add`,
-        formdata
+        `${API_URL}/shop/review/add`,
+        formdata,
+        { withCredentials: true } // optional if backend uses cookies
       );
       return response.data; // { success: true, message: "...", data: {...} }
     } catch (err) {
-      return rejectWithValue(err.response?.data || { success: false, message: "Server error" });
+      return rejectWithValue(
+        err.response?.data || { success: false, message: "Server error" }
+      );
     }
   }
 );
@@ -31,12 +37,12 @@ export const getReviews = createAsyncThunk(
   "/order/getReviews",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/shop/review/${id}`
-      );
+      const response = await axios.get(`${API_URL}/shop/review/${id}`);
       return response.data; // { success: true, data: [...] }
     } catch (err) {
-      return rejectWithValue(err.response?.data || { success: false, message: "Server error" });
+      return rejectWithValue(
+        err.response?.data || { success: false, message: "Server error" }
+      );
     }
   }
 );
