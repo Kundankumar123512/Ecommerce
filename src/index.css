@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: make body full black by default */
+body {
+  @apply bg-black text-white;
+}
+
+body{
+  font-family: "Nunito", serif;
+}
